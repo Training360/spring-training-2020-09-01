@@ -14,7 +14,7 @@
 
 <h1>Create employee</h1>
 
-<form>
+<form method="post">
     <input name="name" />
     <input type="submit" value="Create employee">
 </form>
