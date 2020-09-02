@@ -14,18 +14,23 @@ import javax.websocket.server.PathParam;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/employees")
 public class EmployeesController {
 
-    private EmployeesService employeesService;
+    private final EmployeesService employeesService;
 
     @GetMapping
     public List<EmployeeDto> listEmployees(
             @RequestParam Optional<String> prefix) {
         return employeesService.listEmployees(prefix);
+
+//        return employeesService.listEmployees(prefix)
+//                .stream()
+//                .map(e ->new EmployeeDto(e.getId(), e.getName().toUpperCase())).collect(Collectors.toList());
     }
 
     @PostMapping
