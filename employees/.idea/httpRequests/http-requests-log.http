@@ -1,3 +1,39 @@
+POST http://localhost:8080/api/employees
+Content-Type: application/json
+Accept: application/json
+
+{
+"name": "Jane Doe"
+}
+
+<> 2020-09-02T015954.200.json
+
+###
+
+POST http://localhost:8080/api/employees
+Content-Type: application/json
+Accept: application/json
+
+{
+"name": "Jane Doe"
+}
+
+<> 2020-09-02T015953.200.json
+
+###
+
+POST http://localhost:8080/api/employees
+Content-Type: application/json
+Accept: application/json
+
+{
+"name": "Jane Doe"
+}
+
+<> 2020-09-02T015952.200.json
+
+###
+
 GET http://localhost:8080/api/employees/1
 Accept: application/json
 
