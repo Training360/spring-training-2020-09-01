@@ -1,3 +1,20 @@
+GET http://localhost:8080/api/employees/1
+Accept: application/json
+
+<> 2020-09-02T014506.200.json
+
+###
+
+DELETE http://localhost:8080/api/employees/1
+
+###
+
+DELETE http://localhost:8080/api/employees/1
+
+<> 2020-09-02T014409.405.json
+
+###
+
 GET http://localhost:8080/api/employees
 Accept: application/json
 

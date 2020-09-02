@@ -35,4 +35,14 @@ public class EmployeesController {
         return employeesService.updateEmployee(id, command);
     }
 
+    @DeleteMapping("{id}")
+    public void deleteEmployee(@PathVariable("id") long id) {
+        employeesService.deleteEmployee(id);
+    }
+
+    @GetMapping("{id}")
+    public EmployeeDto findEmployeeById(@PathVariable("id") long id) {
+        return employeesService.findEmployeeById(id);
+    }
+
 }

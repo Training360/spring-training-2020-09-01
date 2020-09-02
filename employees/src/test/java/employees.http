@@ -3,6 +3,11 @@
 GET http://localhost:8080/api/employees
 Accept: application/json
 
+### Find employee by id
+
+GET http://localhost:8080/api/employees/1
+Accept: application/json
+
 ### List employees with filter "Jane"
 
 GET http://localhost:8080/api/employees?prefix=jane
@@ -27,3 +32,7 @@ Accept: application/json
 {
   "name": "John Joe Doe"
 }
+
+### Delete employee
+
+DELETE http://localhost:8080/api/employees/1

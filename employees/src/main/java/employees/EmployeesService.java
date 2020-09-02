@@ -72,4 +72,21 @@ public class EmployeesService {
 
         return modelMapper.map(employee, EmployeeDto.class);
     }
+
+    public void deleteEmployee(long id) {
+        var employee =
+                employees.stream()
+                        .filter(e -> e.getId() == id)
+                        .findAny()
+                        .orElseThrow(() -> new IllegalArgumentException("Employee not found"));
+        employees.remove(employee);
+    }
+
+    public EmployeeDto findEmployeeById(long id) {
+        return modelMapper.map(employees.stream()
+                .filter(e -> e.getId() == id)
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("Employee not found")),
+                EmployeeDto.class);
+    }
 }
