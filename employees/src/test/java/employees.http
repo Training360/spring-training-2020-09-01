@@ -41,3 +41,13 @@ Accept: application/json
 ### Delete employee
 
 DELETE http://localhost:8080/api/employees/1
+
+### Create employee with blank name
+
+POST http://localhost:8080/api/employees
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "   "
+}
