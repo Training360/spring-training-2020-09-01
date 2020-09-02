@@ -1,0 +1,29 @@
+### List employees
+
+GET http://localhost:8080/api/employees
+Accept: application/json
+
+### List employees with filter "Jane"
+
+GET http://localhost:8080/api/employees?prefix=jane
+Accept: application/json
+
+### Create employee
+
+POST http://localhost:8080/api/employees
+Content-Type: application/json
+Accept: application/json
+
+{
+"name": "Jane Doe"
+}
+
+### Update employee
+
+PUT http://localhost:8080/api/employees/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "John Joe Doe"
+}

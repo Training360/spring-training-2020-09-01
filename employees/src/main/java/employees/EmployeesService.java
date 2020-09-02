@@ -54,4 +54,22 @@ public class EmployeesService {
     private Predicate<Employee> emptyOrByPrefix(Optional<String> prefix) {
         return e -> prefix.isEmpty() || e.getName().toLowerCase().startsWith(prefix.get().toLowerCase());
     }
+
+    public EmployeeDto createEmployee(CreateEmployeeCommand command) {
+        var employee = new Employee(idGenerator.incrementAndGet(), command.getName());
+        employees.add(employee); // repository hívás, SQL-el db-be ment
+        return modelMapper.map(employee, EmployeeDto.class);
+    }
+
+    public EmployeeDto updateEmployee(long id, UpdateEmployeeCommand command) {
+        var employee =
+                employees.stream()
+                .filter(e -> e.getId() == id)
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("Employee not found"));
+
+        employee.setName(command.getName());
+
+        return modelMapper.map(employee, EmployeeDto.class);
+    }
 }
