@@ -1,5 +1,7 @@
 package employees;
 
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,10 +23,22 @@ public class EmployeesService {
             new Employee(idGenerator.incrementAndGet(), "Jack Doe")
     )));
 
+    private ModelMapper modelMapper;
+
+    public EmployeesService(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
+
     public List<EmployeeDto> listEmployees() {
-        return employees
-                .stream()
-                .map(e -> new EmployeeDto(e.getId(), e.getName()))
+//        return employees
+//                .stream()
+//                .map(e -> new EmployeeDto(e.getId(), e.getName()))
+//                .collect(Collectors.toList());
+
+        return employees.stream().map(e -> modelMapper.map(e, EmployeeDto.class))
                 .collect(Collectors.toList());
+
+//        java.lang.reflect.Type targetListType = new TypeToken<List<EmployeeDto>>() {}.getType();
+//        return modelMapper.map(employees, targetListType);
     }
 }
