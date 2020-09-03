@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @AllArgsConstructor
 @NoArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement
 public class EmployeeDto {
 
     @XmlAttribute
