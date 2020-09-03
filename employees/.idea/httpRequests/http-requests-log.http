@@ -1,3 +1,61 @@
+GET http://localhost:8080/api/employees
+Accept: application/xml
+
+<> 2020-09-03T110356.200.xml
+
+###
+
+GET http://localhost:8080/api/employees
+Accept: application/json
+
+<> 2020-09-03T110353.200.json
+
+###
+
+GET http://localhost:8080/api/employees
+Accept: application/xml
+
+<> 2020-09-03T110347.200.xml
+
+###
+
+GET http://localhost:8080/api/employees
+Accept: application/xml
+
+###
+
+GET http://localhost:8080/api/employees/1
+Accept: application/xml
+
+<> 2020-09-03T110039.200.xml
+
+###
+
+GET http://localhost:8080/api/employees/1
+Accept: application/xml
+
+###
+
+GET http://localhost:8080/api/employees/1
+Accept: application/xml
+
+###
+
+GET http://localhost:8080/api/employees
+Accept: application/xml
+
+###
+
+GET http://localhost:8080/api/employees
+Accept: application/xml
+
+###
+
+GET http://localhost:8080/api/employees
+Accept: application/xml
+
+###
+
 POST http://localhost:8080/api/employees
 Content-Type: application/json
 Accept: application/json

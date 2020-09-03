@@ -3,10 +3,20 @@
 GET http://localhost:8080/api/employees
 Accept: application/json
 
+### List employees with xml content-type
+
+GET http://localhost:8080/api/employees
+Accept: application/xml
+
 ### Find employee by id
 
 GET http://localhost:8080/api/employees/1
 Accept: application/json
+
+### Find employee by id
+
+GET http://localhost:8080/api/employees/1
+Accept: application/xml
 
 ### Find employee by illegal id
 

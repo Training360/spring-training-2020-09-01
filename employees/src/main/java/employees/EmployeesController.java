@@ -1,6 +1,9 @@
 package employees;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,14 +25,21 @@ import java.util.stream.Collectors;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/employees")
+@Slf4j
 public class EmployeesController {
+
+    //private static final Logger LOGGER = LoggerFactory.getLogger(EmployeesController.class);
 
     private final EmployeesService employeesService;
 
-    @GetMapping
-    public List<EmployeeDto> listEmployees(
+    @GetMapping(produces =
+            {MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_XML_VALUE})
+    public EmployeesDto listEmployees(
             @RequestParam Optional<String> prefix) {
-        return employeesService.listEmployees(prefix);
+        log.debug("List employees: {}", prefix);
+
+        return new EmployeesDto(employeesService.listEmployees(prefix));
 
 //        return employeesService.listEmployees(prefix)
 //                .stream()
@@ -56,7 +66,8 @@ public class EmployeesController {
         employeesService.deleteEmployee(id);
     }
 
-    @GetMapping("{id}")
+    @GetMapping(value = "{id}", produces = {MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE})
     public EmployeeDto findEmployeeById(@PathVariable("id") long id) {
         return employeesService.findEmployeeById(id);
     }
