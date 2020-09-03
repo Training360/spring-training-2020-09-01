@@ -21,8 +21,13 @@ public class EmployeesWebsocketClientApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		employeesGateway.subscribe();
 
+		String line = null;
 		var scanner = new Scanner(System.in);
-		scanner.nextLine();
+		while (!"exit".equals(line)) {
+			line = scanner.nextLine();
+			System.out.println("Command: " + line);
+			employeesGateway.send(line);
+		}
 
 	}
 }
