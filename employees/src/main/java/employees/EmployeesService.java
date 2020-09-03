@@ -1,7 +1,7 @@
 package employees;
 
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,8 +28,11 @@ public class EmployeesService {
 
     private ModelMapper modelMapper;
 
-    public EmployeesService(ModelMapper modelMapper) {
+    private ApplicationEventPublisher publisher;
+
+    public EmployeesService(ModelMapper modelMapper, ApplicationEventPublisher publisher) {
         this.modelMapper = modelMapper;
+        this.publisher = publisher;
     }
 
     public List<EmployeeDto> listEmployees(Optional<String> prefix) {
@@ -58,7 +61,13 @@ public class EmployeesService {
     public EmployeeDto createEmployee(CreateEmployeeCommand command) {
         var employee = new Employee(idGenerator.incrementAndGet(), command.getName());
         employees.add(employee); // repository hívás, SQL-el db-be ment
+
+        // Dobunk egy eventet
+        publisher.publishEvent(new EmployeeHasCreatedEvent("Employee has created "
+            + command.getName()));
+
         return modelMapper.map(employee, EmployeeDto.class);
+
     }
 
     public EmployeeDto updateEmployee(long id, UpdateEmployeeCommand command) {
