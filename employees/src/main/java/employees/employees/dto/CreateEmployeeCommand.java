@@ -1,9 +1,8 @@
-package employees;
+package employees.employees.dto;
 
+import employees.employees.validator.Name;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-
-import javax.validation.constraints.NotBlank;
 
 @Data
 public class CreateEmployeeCommand {

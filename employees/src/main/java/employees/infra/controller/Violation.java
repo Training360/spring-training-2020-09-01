@@ -1,14 +1,15 @@
-package employees;
+package employees.infra.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-// Kifelé menő, topicra menő
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseMessage {
+public class Violation {
 
-    private String content;
+    private String field;
+
+    private String message;
 }

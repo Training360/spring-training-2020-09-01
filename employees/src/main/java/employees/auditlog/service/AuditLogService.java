@@ -1,5 +1,6 @@
-package employees;
+package employees.auditlog.service;
 
+import employees.infra.events.EmployeeHasCreatedEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;

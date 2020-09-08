@@ -1,4 +1,4 @@
-package employees;
+package employees.messages.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

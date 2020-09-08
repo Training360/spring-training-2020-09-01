@@ -1,4 +1,4 @@
-package employees;
+package employees.hello.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

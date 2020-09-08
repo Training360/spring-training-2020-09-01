@@ -1,4 +1,4 @@
-package employees;
+package employees.infra.events;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
