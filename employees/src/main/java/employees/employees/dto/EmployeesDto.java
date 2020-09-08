@@ -1,4 +1,4 @@
-package employees.employees.controller;
+package employees.employees.dto;
 
 import employees.employees.dto.EmployeeDto;
 import lombok.AllArgsConstructor;
