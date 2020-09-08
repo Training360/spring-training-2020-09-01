@@ -8,6 +8,7 @@ import employees.employees.repository.EmployeesRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -63,10 +64,13 @@ public class EmployeesService {
 //            + command.getName()));
 //
 //        return modelMapper.map(employee, EmployeeDto.class);
-        return null;
+        var employee = modelMapper.map(command, Employee.class);
+        employeesRepository.save(employee);
+        return modelMapper.map(employee, EmployeeDto.class);
 
     }
 
+    @Transactional
     public EmployeeDto updateEmployee(long id, UpdateEmployeeCommand command) {
 //        var employee =
 //                employees.stream()
@@ -77,7 +81,12 @@ public class EmployeesService {
 //        employee.setName(command.getName());
 
 //        return modelMapper.map(employee, EmployeeDto.class);
-        return null;
+
+        var employee = employeesRepository
+                .findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Employee not found"));
+        employee.setName(command.getName());
+        return modelMapper.map(employee, EmployeeDto.class);
     }
 
     public void deleteEmployee(long id) {
@@ -87,6 +96,9 @@ public class EmployeesService {
 //                        .findAny()
 //                        .orElseThrow(() -> new IllegalArgumentException("Employee not found"));
 //        employees.remove(employee);
+
+        employeesRepository.deleteById(id);
+
     }
 
     public EmployeeDto findEmployeeById(long id) {
@@ -95,6 +107,8 @@ public class EmployeesService {
 //                .findAny()
 //                .orElseThrow(() -> new IllegalArgumentException("Employee not found")),
 //                EmployeeDto.class);
-        return null;
+        var employee = employeesRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Employee not found"));
+        return modelMapper.map(employee, EmployeeDto.class);
     }
 }
