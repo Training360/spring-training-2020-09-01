@@ -1,11 +1,10 @@
 package employees.employees.service;
 
-import employees.employees.repository.EmployeesDao;
-import employees.infra.events.EmployeeHasCreatedEvent;
 import employees.employees.dto.UpdateEmployeeCommand;
 import employees.employees.dto.CreateEmployeeCommand;
 import employees.employees.dto.EmployeeDto;
 import employees.employees.entity.Employee;
+import employees.employees.repository.EmployeesRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
@@ -23,12 +22,12 @@ public class EmployeesService {
 
     private ApplicationEventPublisher publisher;
 
-    private EmployeesDao employeesDao;
+    private EmployeesRepository employeesRepository;
 
-    public EmployeesService(ModelMapper modelMapper, ApplicationEventPublisher publisher, EmployeesDao employeesDao) {
+    public EmployeesService(ModelMapper modelMapper, ApplicationEventPublisher publisher, EmployeesRepository employeesRepository) {
         this.modelMapper = modelMapper;
         this.publisher = publisher;
-        this.employeesDao = employeesDao;
+        this.employeesRepository = employeesRepository;
     }
 
     public List<EmployeeDto> listEmployees(Optional<String> prefix) {
@@ -37,7 +36,8 @@ public class EmployeesService {
 //                .map(e -> new EmployeeDto(e.getId(), e.getName()))
 //                .collect(Collectors.toList());
 
-        return employeesDao.listEmployees(prefix)
+        return employeesRepository.
+                findAll()
                 .stream()
                 .map(map())
                 .collect(Collectors.toList());

@@ -13,9 +13,9 @@ public class DbInit implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        jdbcTemplate.execute("create table employees " +
-                "(id bigint auto_increment, emp_name varchar(255), " +
-                "primary key (id))");
+//        jdbcTemplate.execute("create table employees " +
+//                "(id bigint auto_increment, emp_name varchar(255), " +
+//                "primary key (id))");
 
         jdbcTemplate.execute(
                 "insert into employees(emp_name) values ('John Doe Db')");
