@@ -19,4 +19,8 @@ public class Employee {
 
     @Column(name = "emp_name")
     private String name;
+
+    public Employee(String name) {
+        this.name = name;
+    }
 }
