@@ -6,14 +6,11 @@ import employees.employees.dto.EmployeeDto;
 import employees.employees.entity.Employee;
 import employees.employees.repository.EmployeesRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
@@ -47,12 +44,12 @@ public class EmployeesService {
 
     }
 
-    @Transactional
     public EmployeeDto updateEmployee(String id, UpdateEmployeeCommand command) {
         var employee = employeesRepository
                 .findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Employee not found"));
         employee.setName(command.getName());
+        employeesRepository.save(employee);
         return modelMapper.map(employee, EmployeeDto.class);
     }
 
