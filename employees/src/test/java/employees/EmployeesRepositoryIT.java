@@ -26,4 +26,16 @@ public class EmployeesRepositoryIT {
                 .extracting(Employee::getName)
                 .containsExactly("John Doe");
     }
+
+    @Test
+    void testSaveAndFindById() {
+        var employee = new Employee("John Doe");
+        employeesRepository.save(employee);
+
+        System.out.println("Id: " + employee.getId());
+
+        var loadedEmployee = employeesRepository.findById(employee.getId());
+
+        assertEquals("John Doe", loadedEmployee.get().getName());
+    }
 }

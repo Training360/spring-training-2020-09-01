@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -34,6 +35,9 @@ public class EmployeesControllerIT {
     @MockBean
     HelloService helloService;
 
+    @MockBean
+    SimpMessagingTemplate simpMessagingTemplate;
+
     @Test
     void testListEmployees() throws Exception {
         when(employeesService.listEmployees(any()))
@@ -45,7 +49,7 @@ public class EmployeesControllerIT {
         mockMvc.perform(get("/api/employees"))
                 .andDo(print())
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$[1].name",
+        .andExpect(jsonPath("$.employees[1].name",
                 equalTo("Jack Doe")));
     }
 
