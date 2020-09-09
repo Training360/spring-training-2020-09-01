@@ -4,10 +4,12 @@ import employees.EmployeesApplication;
 import employees.employees.controller.EmployeesController;
 import employees.employees.dto.CreateEmployeeCommand;
 import employees.employees.repository.EmployeesRepository;
+import employees.gateway.EventStoreGateway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 
@@ -19,6 +21,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ContextConfiguration(classes = EmployeesApplication.class)
 @Sql(statements = "delete from employees")
 public class EmployeesIT {
+
+    @MockBean
+    EventStoreGateway eventStoreGateway;
 
     @Autowired
     EmployeesController controller;
