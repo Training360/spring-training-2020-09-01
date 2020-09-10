@@ -1,11 +1,13 @@
-package employees.gateway;
+package employees.eventstoregateway;
 
+import employees.infra.gateway.Gateway;
+import employees.infra.events.EmployeeHasCreatedEvent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.stereotype.Service;
+import org.springframework.context.event.EventListener;
 import org.springframework.web.client.RestTemplate;
 
-@Service
+@Gateway
 public class EventStoreGateway {
 
     private RestTemplate restTemplate;
@@ -16,6 +18,11 @@ public class EventStoreGateway {
                              @Value("${eventstore.url}") String url) {
         this.restTemplate = builder.build();
         this.url = url;
+    }
+
+    @EventListener
+    public void handleEvent(EmployeeHasCreatedEvent event) {
+        sendEvent("Employee has been created: " + event.getMessage());
     }
 
     public void sendEvent(String message) {

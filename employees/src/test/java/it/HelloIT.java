@@ -1,7 +1,7 @@
 package it;
 
 import employees.EmployeesApplication;
-import employees.gateway.EventStoreGateway;
+import employees.eventstoregateway.EventStoreGateway;
 import employees.hello.controller.HelloController;
 import employees.timesheetgateway.TimesheetGateway;
 import org.junit.jupiter.api.Test;

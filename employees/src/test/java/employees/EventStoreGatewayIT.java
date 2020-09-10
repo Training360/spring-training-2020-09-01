@@ -2,7 +2,7 @@ package employees;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
-import employees.gateway.EventStoreGateway;
+import employees.eventstoregateway.EventStoreGateway;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;

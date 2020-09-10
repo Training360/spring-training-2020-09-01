@@ -1,4 +1,4 @@
-package employees.gateway;
+package employees.eventstoregateway;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
