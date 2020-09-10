@@ -3,6 +3,7 @@ package it;
 import employees.EmployeesApplication;
 import employees.gateway.EventStoreGateway;
 import employees.hello.controller.HelloController;
+import employees.timesheetgateway.TimesheetGateway;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +21,9 @@ public class HelloIT {
 
     @Autowired
     HelloController helloController;
+
+    @MockBean
+    TimesheetGateway timesheetGateway;
 
     @Test
     void testSayHello() {

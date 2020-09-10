@@ -2,6 +2,7 @@ package it;
 
 import employees.EmployeesApplication;
 import employees.gateway.EventStoreGateway;
+import employees.timesheetgateway.TimesheetGateway;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -13,6 +14,9 @@ class EmployeesApplicationTests {
 
 	@MockBean
 	EventStoreGateway eventStoreGateway;
+
+	@MockBean
+	TimesheetGateway timesheetGateway;
 
 	@Test
 	void contextLoads() {

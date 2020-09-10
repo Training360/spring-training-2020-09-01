@@ -5,6 +5,7 @@ import employees.employees.controller.EmployeesController;
 import employees.employees.dto.CreateEmployeeCommand;
 import employees.employees.repository.EmployeesRepository;
 import employees.gateway.EventStoreGateway;
+import employees.timesheetgateway.TimesheetGateway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class EmployeesIT {
 
     @MockBean
     EventStoreGateway eventStoreGateway;
+
+    @MockBean
+    TimesheetGateway timesheetGateway;
 
     @Autowired
     EmployeesController controller;

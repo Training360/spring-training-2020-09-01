@@ -6,6 +6,7 @@ import employees.employees.dto.EmployeeDto;
 import employees.employees.entity.Employee;
 import employees.employees.repository.EmployeesRepository;
 import employees.gateway.EventStoreGateway;
+import employees.timesheetgateway.TimesheetGateway;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
@@ -29,6 +30,8 @@ public class EmployeesService {
     private EmployeesRepository employeesRepository;
 
     private EventStoreGateway eventStoreGateway;
+
+    private TimesheetGateway timesheetGateway;
 
     public List<EmployeeDto> listEmployees(Optional<String> prefix) {
 //        return employees
@@ -67,6 +70,9 @@ public class EmployeesService {
         employeesRepository.save(employee);
 
         eventStoreGateway.sendEvent("Employee has been created: " + command.getName());
+
+        timesheetGateway.createEmployee("Employee has been created: "
+            + command.getName());
 
         return modelMapper.map(employee, EmployeeDto.class);
 
