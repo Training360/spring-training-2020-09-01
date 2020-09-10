@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import employees.timesheetgateway.TimesheetConfig;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.actuate.trace.http.HttpTraceRepository;
+import org.springframework.boot.actuate.trace.http.InMemoryHttpTraceRepository;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.annotation.EnableCaching;
@@ -33,6 +35,11 @@ public class EmployeesApplication {
 	public ObjectMapper objectMapper() {
 		return new ObjectMapper()
 				.findAndRegisterModules();
+	}
+
+	@Bean
+	public HttpTraceRepository httpTraceRepository() {
+		return new InMemoryHttpTraceRepository();
 	}
 
 //	@Bean

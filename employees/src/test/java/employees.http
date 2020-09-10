@@ -61,3 +61,17 @@ Accept: application/json
 {
   "name": "John Doe"
 }
+
+### Shutdown
+
+POST http://localhost:8080/actuator/shutdown
+
+
+### Log
+
+POST http://localhost:8080/actuator/loggers/employees
+Content-Type: application/json
+
+{
+  "configuredLevel": "INFO"
+}
