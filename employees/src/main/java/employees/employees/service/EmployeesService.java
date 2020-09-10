@@ -8,7 +8,10 @@ import employees.employees.repository.EmployeesRepository;
 import employees.infra.events.EmployeeHasCreatedEvent;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +27,7 @@ public class EmployeesService {
 
     private ModelMapper modelMapper;
 
-    private ApplicationEventPublisher publisher;
+    private EmployeeEventPublisher employeeEventPublisher;
 
     private EmployeesRepository employeesRepository;
 
@@ -64,15 +67,17 @@ public class EmployeesService {
         var employee = modelMapper.map(command, Employee.class);
         employeesRepository.save(employee);
 
-        // Dobunk egy eventet
-        publisher.publishEvent(new EmployeeHasCreatedEvent("Employee has created "
-            + command.getName()));
+        employeeEventPublisher.createEvent("Employee has created "
+                + command.getName());
 
         return modelMapper.map(employee, EmployeeDto.class);
 
     }
 
+
+
     @Transactional
+    @CacheEvict(value = "employee", key = "#id")
     public EmployeeDto updateEmployee(long id, UpdateEmployeeCommand command) {
 //        var employee =
 //                employees.stream()
@@ -91,6 +96,7 @@ public class EmployeesService {
         return modelMapper.map(employee, EmployeeDto.class);
     }
 
+    @CacheEvict(value = "employee", key = "#id")
     public void deleteEmployee(long id) {
 //        var employee =
 //                employees.stream()
@@ -103,6 +109,7 @@ public class EmployeesService {
 
     }
 
+    @Cacheable("employee")
     public EmployeeDto findEmployeeById(long id) {
 //        return modelMapper.map(employees.stream()
 //                .filter(e -> e.getId() == id)
